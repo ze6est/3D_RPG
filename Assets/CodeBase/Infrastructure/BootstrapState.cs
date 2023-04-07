@@ -1,20 +1,30 @@
 ﻿using CodeBase.Services.Input;
+using System;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
     public class BootstrapState : IState
     {
-        private GameStateMachine _stateMachine;
+        private const string Initial = "Initial";
+        private readonly GameStateMachine _stateMachine;
+        private readonly SceneLoader _sceneLoader;
 
-        public BootstrapState(GameStateMachine stateMachine)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
         }
 
         public void Enter()
         {
             RegisterSetvices();
+            _sceneLoader.Load(Initial, EnterLoadLevel);
+        }
+
+        private void EnterLoadLevel()
+        {
+            
         }
 
         public void Exit()
