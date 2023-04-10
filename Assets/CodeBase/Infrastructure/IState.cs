@@ -1,8 +1,17 @@
 ﻿namespace CodeBase.Infrastructure
 {
-    public interface IState
+    public interface IState : IExitableState
     {
-        public void Enter();
+        public void Enter();        
+    }
+
+    public interface IPayloadedState<TPayload> : IExitableState
+    {
+        public void Enter(TPayload payload);        
+    }
+
+    public interface IExitableState
+    {
         public void Exit();
     }
 }
