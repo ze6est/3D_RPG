@@ -1,6 +1,6 @@
 ﻿namespace CodeBase.Infrastructure.Services
 {
-    public interface IServise
+    public interface IService
     {
     }
 }

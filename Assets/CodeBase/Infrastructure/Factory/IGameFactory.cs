@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
 {
-    public interface IGameFactory : IServise
+    public interface IGameFactory : IService
     {
         public GameObject CreatePlayer(GameObject at);
         public void CreateHud();
