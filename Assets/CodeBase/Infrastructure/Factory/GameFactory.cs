@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
@@ -20,6 +20,6 @@ namespace CodeBase.Infrastructure
         public void CreateHud()
         {
             _assets.Instantiate(AssetPath.HudPath);
-        }        
-    }    
+        }
+    }
 }

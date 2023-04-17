@@ -1,7 +1,10 @@
-﻿using CodeBase.Services.Input;
+﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Services.Input;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.States
 {
     public class BootstrapState : IState
     {
@@ -21,17 +24,19 @@ namespace CodeBase.Infrastructure
             _sceneLoader.Load(Initial, EnterLoadLevel);
         }
 
-        private void EnterLoadLevel() => 
+        private void EnterLoadLevel() =>
             _stateMachine.Enter<LoadLevelState, string>("Main");
 
         public void Exit()
         {
-            
+
         }
 
         private void RegisterSetvices()
         {
             Game.InputService = RegisterInputService();
+
+            AllServices.Container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>()));
         }
 
         private static IInputService RegisterInputService()

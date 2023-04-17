@@ -1,8 +1,9 @@
-﻿using CodeBase.CameraLogic;
+﻿using CodeBase.Infrastructure.Factory;
+using CodeBase.CameraLogic;
 using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
@@ -13,7 +14,7 @@ namespace CodeBase.Infrastructure
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
 
-        public LoadLevelState(GameStateMachine stateMachine,SceneLoader sceneLoader, LoadingCurtain curtain)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -26,7 +27,7 @@ namespace CodeBase.Infrastructure
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
-        public void Exit() => 
+        public void Exit() =>
             _curtain.Hide();
 
         private void OnLoaded()
@@ -37,9 +38,9 @@ namespace CodeBase.Infrastructure
             CameraFollow(player);
 
             _stateMachine.Enter<GameLoopState>();
-        }        
+        }
 
-        private void CameraFollow(GameObject player) => 
+        private void CameraFollow(GameObject player) =>
             Camera.main.GetComponent<CameraFollow>().Follow(player);
     }
 }
