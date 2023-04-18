@@ -1,16 +1,28 @@
 using UnityEngine;
-using CodeBase.Services.Input;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Input;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Data;
 
 namespace CodeBase.Hero
 {
-    public class HeroMove : MonoBehaviour
+    public class HeroMove : MonoBehaviour, ISavedProgress
     {
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private float _movementSpeed;
 
         private Camera _camera;
         private IInputService _inputService;
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            
+        }
 
         private void Awake()
         {
