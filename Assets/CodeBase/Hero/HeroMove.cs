@@ -21,7 +21,7 @@ namespace CodeBase.Hero
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            
+            progress.WorldData.Position = transform.position.AsVector3Data();
         }
 
         private void Awake()
