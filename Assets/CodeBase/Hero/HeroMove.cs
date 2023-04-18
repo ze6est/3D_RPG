@@ -3,6 +3,8 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Data;
+using Assets.CodeBase.Data;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Hero
 {
@@ -13,16 +15,6 @@ namespace CodeBase.Hero
 
         private Camera _camera;
         private IInputService _inputService;
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.WorldData.Position = transform.position.AsVector3Data();
-        }
 
         private void Awake()
         {
@@ -50,6 +42,30 @@ namespace CodeBase.Hero
             movementVector += Physics.gravity;
 
             _characterController.Move(_movementSpeed * movementVector * Time.deltaTime);
-        }        
+        }
+        
+        public void LoadProgress(PlayerProgress progress)
+        {
+            if(GetCurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+            {
+                Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
+
+                if (savedPosition != null)                                    
+                    Warp(to: savedPosition);                
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress) => 
+            progress.WorldData.PositionOnLevel = new PositionOnLevel(GetCurrentLevel(), transform.position.AsVector3Data());
+
+        private void Warp(Vector3Data to)
+        {
+            _characterController.enabled = false;
+            transform.position = to.AsUnityVector3();
+            _characterController.enabled = true;
+        }
+
+        private static string GetCurrentLevel() =>
+            SceneManager.GetActiveScene().name;
     }
 }
