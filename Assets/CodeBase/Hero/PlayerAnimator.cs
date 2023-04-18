@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CodeBase.Hero
 {
-    public class HeroAnimator : MonoBehaviour
+    public class PlayerAnimator : MonoBehaviour
     {
         private static readonly int MoveHash = Animator.StringToHash("RFA_Movement");
 
