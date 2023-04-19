@@ -3,7 +3,6 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Data;
-using Assets.CodeBase.Data;
 using UnityEngine.SceneManagement;
 
 namespace CodeBase.Hero
