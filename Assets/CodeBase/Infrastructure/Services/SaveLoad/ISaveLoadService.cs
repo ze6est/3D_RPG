@@ -2,7 +2,7 @@
 
 namespace CodeBase.Infrastructure.Services.SaveLoad
 {
-    public interface ISaveLoadServise : IService
+    public interface ISaveLoadService : IService
     {
         public void SaveProgress();
         public PlayerProgress LoadProgress();

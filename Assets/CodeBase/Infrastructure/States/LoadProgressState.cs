@@ -8,9 +8,9 @@ namespace CodeBase.Infrastructure.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
-        private readonly ISaveLoadServise _saveLoadServise;
+        private readonly ISaveLoadService _saveLoadServise;
 
-        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadServise saveLoadServise)
+        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadServise)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;

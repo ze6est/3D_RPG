@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.SaveLoad
 {
-    public class SaveLoadService : ISaveLoadServise
+    public class SaveLoadService : ISaveLoadService
     {
         private const string ProgressKey = "Progress";
 

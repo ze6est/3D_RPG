@@ -2,17 +2,17 @@
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
-namespace Assets.CodeBase.Logic
+namespace CodeBase.Logic
 {
     public class SaveTrigger : MonoBehaviour
     {
         [SerializeField] private BoxCollider _collider;
 
-        private SaveLoadService _saveLoadService;
+        private ISaveLoadService _saveLoadService;
 
         private void Awake()
         {
-            _saveLoadService = AllServices.Container.Single<SaveLoadService>();
+            _saveLoadService = AllServices.Container.Single<ISaveLoadService>();
         }
 
         private void OnTriggerEnter(Collider other)

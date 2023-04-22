@@ -703,6 +703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 7463126602246791629, guid: 84bff66fcda8a3c4085960798ddfbef4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8505850167701587067, guid: 84bff66fcda8a3c4085960798ddfbef4, type: 3}
       propertyPath: m_RootOrder
       value: 4
