@@ -5,7 +5,7 @@ using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Data;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Hero
+namespace CodeBase.Player
 {
     public class PlayerMove : MonoBehaviour, ISavedProgress
     {

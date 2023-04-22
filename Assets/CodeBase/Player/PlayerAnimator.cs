@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Hero
+namespace CodeBase.Player
 {
     public class PlayerAnimator : MonoBehaviour
     {
