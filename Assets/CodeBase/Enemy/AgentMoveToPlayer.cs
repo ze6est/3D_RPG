@@ -7,9 +7,9 @@ namespace CodeBase.Enemy
 {
     public class AgentMoveToPlayer : MonoBehaviour
     {
-        [SerializeField] private NavMeshAgent _agent;
-
         private const float MinimalDistance = 1f;
+
+        [SerializeField] private NavMeshAgent _agent;
 
         private Transform _playerTransform;
         private IGameFactory _gameFactory;
