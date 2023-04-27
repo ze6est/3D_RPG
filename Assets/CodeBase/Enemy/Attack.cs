@@ -1,23 +1,32 @@
-﻿using CodeBase.Enemy;
-using CodeBase.Infrastructure.Factory;
+﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using System;
+using System.Linq;
 using UnityEngine;
 
-namespace Assets.CodeBase.Enemy
+namespace CodeBase.Enemy
 {
     public class Attack : MonoBehaviour
     {
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _attackCooldown = 3f;
+        [SerializeField] private float _cleavage = 0.5f;
+        [SerializeField] private float _effectiveDistance = 0.5f;
 
         private IGameFactory _gameFactory;
         private Transform _playerTransform;
         private float _currentAttackCooldown;
         private bool _isAttacking;
+        private int _layerMask;
+        private Collider[] _hits = new Collider[1];
+        private bool _attackIsActive;
 
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
+
+            _layerMask = 1 << LayerMask.NameToLayer("Player");
+
             _gameFactory.PlayerCreated += OnPlayerCreated;
         }
 
@@ -29,12 +38,40 @@ namespace Assets.CodeBase.Enemy
                 StartAttack();
         }
 
-        private void OnAttack() { }
+        private void OnAttack() 
+        {
+            if (Hit(out Collider hit))
+                PhysicsDebug.DrawDebug(GetStartPoint(), _cleavage, 1f);
+        }
 
         private void OnAttackEnded() 
         {
             _currentAttackCooldown = _attackCooldown;
             _isAttacking = false;
+        }
+
+        public void EnableAttack()
+        {
+            _attackIsActive = true;
+        }
+
+        public void DisableAttack()
+        {
+            _attackIsActive = false;
+        }
+
+        private bool Hit(out Collider hit)
+        {            
+            int hitsCount = Physics.OverlapSphereNonAlloc(GetStartPoint(), _cleavage, _hits, _layerMask);
+
+            hit = _hits.FirstOrDefault();
+
+            return hitsCount > 0;
+        }
+
+        private Vector3 GetStartPoint()
+        {
+            return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * _effectiveDistance;
         }
 
         private void UpdateCooldown()
@@ -45,7 +82,7 @@ namespace Assets.CodeBase.Enemy
 
         private bool CanAttack()
         {
-            return !_isAttacking && CooldownIsUp();
+            return _attackIsActive && !_isAttacking && CooldownIsUp();
         }
 
         private bool CooldownIsUp()
@@ -65,5 +102,6 @@ namespace Assets.CodeBase.Enemy
         {
             _playerTransform = _gameFactory.PlayerGameObject.transform;
         }
+
     }
 }
