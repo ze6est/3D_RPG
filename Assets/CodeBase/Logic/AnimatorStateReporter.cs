@@ -19,7 +19,7 @@ namespace CodeBase.Logic
             base.OnStateEnter(animator, stateInfo, layerIndex);
             FindReader(animator);
 
-            _stateReader.ExitedState(stateInfo.shortNameHash);
+            _stateReader.EnteredState(stateInfo.shortNameHash);
         }
 
         private void FindReader(Animator animator)
