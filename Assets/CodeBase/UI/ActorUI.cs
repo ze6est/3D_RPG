@@ -1,10 +1,9 @@
 ﻿using CodeBase.Player;
-using System;
 using UnityEngine;
 
 namespace CodeBase.UI
 {
-    public class ActorUI
+    public class ActorUI : MonoBehaviour
     {
         [SerializeField] private HpBar _hpBar;
 

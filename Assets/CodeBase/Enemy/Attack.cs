@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Player;
 using System.Linq;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace CodeBase.Enemy
         [SerializeField] private float _attackCooldown = 3f;
         [SerializeField] private float _cleavage = 0.5f;
         [SerializeField] private float _effectiveDistance = 0.5f;
+        [SerializeField] private float _damage = 10f;
 
         private IGameFactory _gameFactory;
         private Transform _playerTransform;
@@ -43,7 +45,10 @@ namespace CodeBase.Enemy
         private void OnAttack() 
         {
             if (Hit(out Collider hit))
+            {
                 PhysicsDebug.DrawDebug(GetStartPoint(), _cleavage, DrawSeconds);
+                hit.transform.GetComponent<PlayerHealth>().TakeDamage(_damage);
+            }
         }
 
         private void OnAttackEnded() 
