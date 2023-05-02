@@ -1,6 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -8,6 +7,9 @@ namespace CodeBase.Enemy
 {
     public class Attack : MonoBehaviour
     {
+        private const float DrawSeconds = 1f;
+        private const string LayerPlayer = "Player";
+
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _attackCooldown = 3f;
         [SerializeField] private float _cleavage = 0.5f;
@@ -25,7 +27,7 @@ namespace CodeBase.Enemy
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
 
-            _layerMask = 1 << LayerMask.NameToLayer("Player");
+            _layerMask = 1 << LayerMask.NameToLayer(LayerPlayer);
 
             _gameFactory.PlayerCreated += OnPlayerCreated;
         }
@@ -41,7 +43,7 @@ namespace CodeBase.Enemy
         private void OnAttack() 
         {
             if (Hit(out Collider hit))
-                PhysicsDebug.DrawDebug(GetStartPoint(), _cleavage, 1f);
+                PhysicsDebug.DrawDebug(GetStartPoint(), _cleavage, DrawSeconds);
         }
 
         private void OnAttackEnded() 
