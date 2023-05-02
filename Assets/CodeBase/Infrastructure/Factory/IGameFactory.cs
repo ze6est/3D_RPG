@@ -15,7 +15,7 @@ namespace CodeBase.Infrastructure.Factory
         public event Action PlayerCreated;
 
         public GameObject CreatePlayer(GameObject at);
-        public void CreateHud();
+        public GameObject CreateHud();
         public void CleanUp();
     }
 }

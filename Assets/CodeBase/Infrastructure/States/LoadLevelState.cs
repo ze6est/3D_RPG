@@ -2,8 +2,9 @@
 using CodeBase.CameraLogic;
 using CodeBase.Logic;
 using UnityEngine;
-using System;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.UI;
+using CodeBase.Player;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -47,14 +48,15 @@ namespace CodeBase.Infrastructure.States
         private void InformProgressReaders()
         {
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)            
-                progressReader.LoadProgress(_progressService.Progress);
-            
+                progressReader.LoadProgress(_progressService.Progress);            
         }
 
         private void InitGameWorld()
         {
             GameObject player = _gameFactory.CreatePlayer(GameObject.FindGameObjectWithTag(InitialPointTag));
-            _gameFactory.CreateHud();
+            GameObject hud = _gameFactory.CreateHud();
+
+            hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());
 
             CameraFollow(player);
         }
