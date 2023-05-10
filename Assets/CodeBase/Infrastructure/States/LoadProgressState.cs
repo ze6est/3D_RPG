@@ -7,6 +7,8 @@ namespace CodeBase.Infrastructure.States
     public class LoadProgressState : IState
     {
         private const float MaxHpPlayer = 50f;
+        private const float Damage = 1f;
+        private const float DamageRadius = 0.5f;
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
@@ -40,6 +42,9 @@ namespace CodeBase.Infrastructure.States
 
             progress.PlayerState.MaxHP = MaxHpPlayer;
             progress.PlayerState.ResetHP();
+
+            progress.PlayerStats.Damage = Damage;
+            progress.PlayerStats.DamageRadius = DamageRadius;
 
             return progress;
         }

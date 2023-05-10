@@ -3,15 +3,17 @@
 namespace CodeBase.Data
 {
     [Serializable]
-    public class PlayerProgress
+    public partial class PlayerProgress
     {
         public WorldData WorldData;
         public State PlayerState;
+        public Stats PlayerStats;
 
         public PlayerProgress(string initialLevel)
         {
             WorldData = new WorldData(initialLevel);
             PlayerState = new State();
+            PlayerStats = new Stats();
         }
     }
 }
