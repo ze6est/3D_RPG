@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace CodeBase.Enemy
 {
@@ -10,12 +11,14 @@ namespace CodeBase.Enemy
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private GameObject _deathFx;
+        [SerializeField] private Follow _follow;
 
         public event Action DeathChanged;
 
         private void Start()
         {
             _health.HealthChanged += OnHealthChanged;
+            _follow = GetComponent<Follow>();
         }
 
         private void OnDestroy()
@@ -34,6 +37,7 @@ namespace CodeBase.Enemy
             _health.HealthChanged -= OnHealthChanged;
 
             _animator.PlayDeath();
+            _follow.enabled = false;
             SpawnDeathFx();
 
             DeathChanged?.Invoke();

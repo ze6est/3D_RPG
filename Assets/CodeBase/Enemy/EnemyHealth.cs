@@ -1,4 +1,4 @@
-﻿using Assets.CodeBase.Logic;
+﻿using CodeBase.Logic;
 using System;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ namespace CodeBase.Enemy
     {
         [SerializeField] private EnemyAnimator _animator;
 
-        private float _current;
-        private float _max;
+        [SerializeField] private float _current;
+        [SerializeField] private float _max;
 
         public float Current => _current;
         public float Max => _max;

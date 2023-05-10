@@ -1,4 +1,5 @@
-﻿using CodeBase.Player;
+﻿using CodeBase.Logic;
+using CodeBase.Player;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -7,12 +8,23 @@ namespace CodeBase.UI
     {
         [SerializeField] private HpBar _hpBar;
 
-        private PlayerHealth _playerHealth;
+        private IHealth _playerHealth;
 
-        private void OnDestroy() =>
-            _playerHealth.HealthChanged -= OnHealthChanged;
+        private void Start()
+        {
+            IHealth health = GetComponent<IHealth>();
 
-        public void Construct(PlayerHealth playerHealth)
+            if (health != null)
+                Construct(health);
+        }
+
+        private void OnDestroy()
+        {
+            if (_playerHealth != null)
+                _playerHealth.HealthChanged -= OnHealthChanged;
+        }
+
+        public void Construct(IHealth playerHealth)
         {
             _playerHealth = playerHealth;
 
