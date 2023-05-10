@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Player
@@ -32,7 +33,10 @@ namespace CodeBase.Player
 
         public void OnAttack()
         {
-
+            for (int i = 0; i < Hit(); i++)
+            {
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage);
+            }
         }
 
         private int Hit() =>

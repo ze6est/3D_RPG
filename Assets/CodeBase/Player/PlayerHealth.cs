@@ -1,17 +1,18 @@
 ﻿using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Logic;
 using System;
 using UnityEngine;
 
 namespace CodeBase.Player
 {
-    public class PlayerHealth : MonoBehaviour, ISavedProgress
+    public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
     {
         [SerializeField] private PlayerAnimator _animator;
 
         private State _state;
 
-        public Action HealthChanged;
+        public event Action HealthChanged;
 
         public float Current
         {
