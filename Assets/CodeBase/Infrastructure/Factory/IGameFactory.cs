@@ -17,5 +17,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreatePlayer(GameObject at);
         public GameObject CreateHud();
         public void CleanUp();
+        public void Register(ISavedProgressReader reader);
     }
 }
