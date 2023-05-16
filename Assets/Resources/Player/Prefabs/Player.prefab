@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1631626346295857193}
-  _movementSpeed: 4
+  _movementSpeed: 6
 --- !u!95 &4694680314058551963
 Animator:
   serializedVersion: 3

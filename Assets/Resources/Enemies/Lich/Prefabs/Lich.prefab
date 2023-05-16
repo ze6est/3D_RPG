@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1500939411536426, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Lich
       objectReference: {fileID: 0}
     - target: {fileID: 4665124114459090, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
       propertyPath: m_RootOrder
@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3376225710501474315, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
+      propertyPath: _follow
+      value: 
+      objectReference: {fileID: 3789970193606528381}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
 --- !u!4 &797529298858910896 stripped
@@ -66,6 +70,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4665124114459090, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
   m_PrefabInstance: {fileID: 793185816307256674}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3789970193606528381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4582794717227581471, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
+  m_PrefabInstance: {fileID: 793185816307256674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5680e55c6a259a44c8c66bc9c2b0e1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7143425999468558035
 PrefabInstance:
   m_ObjectHideFlags: 0
