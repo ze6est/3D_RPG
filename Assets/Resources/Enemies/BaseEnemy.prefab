@@ -42,6 +42,7 @@ Transform:
   - {fileID: 5534858539610984142}
   - {fileID: 63309128509444128}
   - {fileID: 1910166611661146874}
+  - {fileID: 8258574613273084101}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,49 +61,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: '
-
-    Transform ''Head'' has been deleted
-
-    Transform ''Hand_L''
-    has been deleted
-
-    Transform ''Lower_Arm_L'' has been deleted
-
-    Transform
-    ''Upper_Arm_L'' has been deleted
-
-    Transform ''Hand_R'' has been deleted
-
-    Transform
-    ''Rower_Arm_R'' has been deleted
-
-    Transform ''Upper_Arm_R'' has been deleted
-
-    Transform
-    ''Spine'' has been deleted
-
-    Transform ''Toes_L'' has been deleted
-
-    Transform
-    ''Foot_L'' has been deleted
-
-    Transform ''Lower_Leg_L'' has been deleted
-
-    Transform
-    ''Upper_Leg_L'' has been deleted
-
-    Transform ''Toes_R'' has been deleted
-
-    Transform
-    ''Foot_R'' has been deleted
-
-    Transform ''Rower_Reg_R'' has been deleted
-
-    Transform
-    ''Upper_Reg_R'' has been deleted
-
-    Transform ''Hips'' has been deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -195,10 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8764709063790310729}
-  _attackCooldown: 3
-  _cleavage: 0.5
-  _effectiveDistance: 0.5
-  _damage: 10
+  AttackCooldown: 3
+  AttackCleavage: 0.5
+  EffectiveDistance: 0.5
+  Damage: 10
 --- !u!114 &6101180879854598255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +202,7 @@ MonoBehaviour:
   _animator: {fileID: 8764709063790310729}
   _health: {fileID: 4969917310261381455}
   _deathFx: {fileID: 1065852371565802164, guid: 372c9fc66613f874ba12e5d7d483bb8a, type: 3}
-  _agro: {fileID: 2796996816431329100}
+  _follow: {fileID: 0}
 --- !u!114 &5753564278931317512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,3 +679,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f3ed71d0ed448573a40b2584a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8382440233963987248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8258574613273084101}
+  - component: {fileID: 2103105866457273673}
+  m_Layer: 0
+  m_Name: LootSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8258574613273084101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382440233963987248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4665124114459090}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103105866457273673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382440233963987248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05dcc7ae643a43941818accb8ea84bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDeath: {fileID: 3376225710501474315}

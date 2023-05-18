@@ -7,10 +7,15 @@ namespace CodeBase.Infrastructure.StaticData
     public class MonsterStaticData : ScriptableObject
     {
         public MonsterTypeId MonsterTypeId;
+
         [Range(1, 100)]
         public int Hp;
         [Range(1f, 30f)]
         public float Damage;
+
+        public int MaxLoot;
+        public int MinLoot;
+
         [FormerlySerializedAs("EffectiveDistance")]
         [Range(0.5f, 1f)]
         public float AttackEffectiveDistance = 0.5f;

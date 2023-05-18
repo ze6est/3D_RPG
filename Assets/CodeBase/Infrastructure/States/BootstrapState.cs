@@ -40,20 +40,26 @@ namespace CodeBase.Infrastructure.States
 
         private void RegisterSetvices()
         {
-            RegisterStaticData();
+            IStaticDataService staticData = RegisterStaticData();            
 
-            _container.RegisterSingle<IInputService>(InputService());
-            _container.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _container.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>(), AllServices.Container.Single<IStaticDataService>()));
+            IAssetProvider assetProvider = new AssetProvider();
+            IRandomService randomService = new RandomService();
+            IPersistentProgressService progressService = new PersistentProgressService();
+
+            _container.RegisterSingle<IInputService>(InputService());            
+            _container.RegisterSingle<IAssetProvider>(assetProvider);
+            _container.RegisterSingle<IPersistentProgressService>(progressService);
+            _container.RegisterSingle<IGameFactory>(new GameFactory(assetProvider, staticData, randomService, progressService));
             _container.RegisterSingle<ISaveLoadService>(new SaveLoadService(_container.Single<IPersistentProgressService>(), _container.Single<IGameFactory>()));
         }
 
-        private void RegisterStaticData()
+        private IStaticDataService RegisterStaticData()
         {
             IStaticDataService staticData = new StaticDataService();
             staticData.LoadMonsters();
             _container.RegisterSingle(staticData);
+
+            return staticData;
         }
 
         private static IInputService InputService()
