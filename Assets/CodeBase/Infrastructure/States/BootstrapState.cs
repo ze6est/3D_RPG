@@ -56,7 +56,7 @@ namespace CodeBase.Infrastructure.States
         private IStaticDataService RegisterStaticData()
         {
             IStaticDataService staticData = new StaticDataService();
-            staticData.LoadMonsters();
+            staticData.Load();
             _container.RegisterSingle(staticData);
 
             return staticData;

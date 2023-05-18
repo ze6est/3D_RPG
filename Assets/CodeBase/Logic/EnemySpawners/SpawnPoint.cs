@@ -2,30 +2,27 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
-using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Enemy;
 
-namespace CodeBase.Logic
+namespace CodeBase.Logic.EnemySpawners
 {
-    public class EnemySpawner : MonoBehaviour, ISavedProgress
+    public partial class SpawnPoint : MonoBehaviour, ISavedProgress
     {
-        [SerializeField] private MonsterTypeId _monsterTypeId;
+        public MonsterTypeId MonsterTypeId { get; set; }
+        public string Id { get; set; }
+
         [SerializeField] private bool _slain;
 
-        private string _id;
         private IGameFactory _factory;
         private EnemyDeath _enemyDeath;
 
-        private void Awake()
-        {
-            _id = GetComponent<UniqueId>().Id;
-            _factory = AllServices.Container.Single<IGameFactory>();
-        }
+        public void Construct(IGameFactory factory) => 
+            _factory = factory;
 
         public void LoadProgress(PlayerProgress progress)
         {
-            if (progress.KillData.ClearedSpawners.Contains(_id))
+            if (progress.KillData.ClearedSpawners.Contains(Id))
                 _slain = true;
             else
                 Spawn();
@@ -34,12 +31,12 @@ namespace CodeBase.Logic
         public void UpdateProgress(PlayerProgress progress)
         {
             if (_slain)
-                progress.KillData.ClearedSpawners.Add(_id);
+                progress.KillData.ClearedSpawners.Add(Id);
         }
 
         private void Spawn()
         {
-            GameObject monster = _factory.CreateMonster(_monsterTypeId, transform);
+            GameObject monster = _factory.CreateMonster(MonsterTypeId, transform);
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.DeathChanged += OnDeathChanged;
         }

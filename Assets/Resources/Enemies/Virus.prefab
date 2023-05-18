@@ -9805,7 +9805,7 @@ GameObject:
   - component: {fileID: 1065852371579556468}
   - component: {fileID: 1065852371571279700}
   m_Layer: 0
-  m_Name: CFX_Virus
+  m_Name: Virus
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
