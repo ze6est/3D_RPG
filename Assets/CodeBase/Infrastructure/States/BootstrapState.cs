@@ -6,6 +6,8 @@ using UnityEngine;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.StaticData;
+using CodeBase.UI.Factory;
+using CodeBase.UI.Services;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -44,12 +46,16 @@ namespace CodeBase.Infrastructure.States
 
             IAssetProvider assetProvider = new AssetProvider();
             IRandomService randomService = new RandomService();
-            IPersistentProgressService progressService = new PersistentProgressService();
+            IPersistentProgressService progressService = new PersistentProgressService();            
 
             _container.RegisterSingle<IInputService>(InputService());            
             _container.RegisterSingle<IAssetProvider>(assetProvider);
             _container.RegisterSingle<IPersistentProgressService>(progressService);
-            _container.RegisterSingle<IGameFactory>(new GameFactory(assetProvider, staticData, randomService, progressService));
+
+            _container.RegisterSingle<IUIFactory>(new UIFactory(assetProvider, staticData, progressService));
+            _container.RegisterSingle<IWindowService>(new WindowService(_container.Single<IUIFactory>()));
+
+            _container.RegisterSingle<IGameFactory>(new GameFactory(assetProvider, staticData, randomService, progressService, _container.Single<IWindowService>()));
             _container.RegisterSingle<ISaveLoadService>(new SaveLoadService(_container.Single<IPersistentProgressService>(), _container.Single<IGameFactory>()));
         }
 

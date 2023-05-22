@@ -1,11 +1,14 @@
-﻿using CodeBase.Infrastructure.Services;
+﻿using CodeBase.Infrastructure.StaticData.Windows;
+using CodeBase.Infrastructure.StaticData;
+using CodeBase.UI.StaticData;
 
-namespace CodeBase.Infrastructure.StaticData
+namespace CodeBase.Infrastructure.Services
 {
     public interface IStaticDataService : IService
     {
-        LevelStaticData ForLevel(string sceneKey);
-        MonsterStaticData ForMonster(MonsterTypeId typeId);
-        void Load();
+        public LevelStaticData ForLevel(string sceneKey);
+        public MonsterStaticData ForMonster(MonsterTypeId typeId);
+        public WindowConfig ForWindow(WindowId shop);
+        public void Load();
     }
 }

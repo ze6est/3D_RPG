@@ -5,10 +5,11 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.StaticData;
 using CodeBase.Logic;
-using CodeBase.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Services;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -16,20 +17,23 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IRandomService _randomService;
+        private readonly IPersistentProgressService _progressService;
+        private readonly IWindowService _windowService;
 
         private GameObject PlayerGameObject;
-        private IRandomService _randomService;
-        private IPersistentProgressService _progressService;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService, IPersistentProgressService progressService)
+        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService, IPersistentProgressService progressService,
+            IWindowService windowService)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
+            _windowService = windowService;
         }
 
         public GameObject CreatePlayer(GameObject at)
@@ -44,6 +48,9 @@ namespace CodeBase.Infrastructure.Factory
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
 
             hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
+
+            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+                openWindowButton.Construct(_windowService);            
 
             return hud;
         }

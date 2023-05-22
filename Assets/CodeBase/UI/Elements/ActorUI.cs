@@ -1,8 +1,7 @@
 ﻿using CodeBase.Logic;
-using CodeBase.Player;
 using UnityEngine;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Elements
 {
     public class ActorUI : MonoBehaviour
     {
